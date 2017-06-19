@@ -1,0 +1,262 @@
+// ListView.cpp: implementation of the CWListView class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CWListView::CWListView()
+{
+	this->m_dwStyle			= WS_CHILD | WS_VISIBLE | LVS_SHOWSELALWAYS;
+	this->m_strClassName	= "SysListView32";
+}
+
+CWListView::~CWListView()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::Create(HWND parent, int id, DWORD exlvstyle)
+{
+	this->m_hParent			= parent;
+	this->m_nID				= id;
+	if (exlvstyle != NULL)
+		this->m_dwExLvStyle = exlvstyle;
+	
+	m_hWnd = ::CreateWindowEx(	this->m_dwExStyle,
+								this->m_strClassName, 
+								this->m_strTitle,
+								this->m_dwStyle,
+								this->m_nX,
+								this->m_nY,
+								this->m_nWidth,
+								this->m_nHeight,
+								this->m_hParent,
+								(HMENU)this->m_nID,
+								this->m_hInstance,
+								NULL);
+
+	::ShowWindow(m_hWnd, SW_SHOW);
+	::UpdateWindow(m_hWnd);
+ 
+	ListView_SetExtendedListViewStyleEx(m_hWnd, m_dwExLvStyle, m_dwExLvStyle);
+ 
+	m_hHeader = CreateWindow(	WC_HEADER,
+								"", 
+								HDS_HORZ|HDS_BUTTONS, 
+								this->m_nX,
+								this->m_nY,
+								this->m_nWidth+10,
+								this->m_nHeight,
+								this->m_hWnd,
+								NULL,
+								this->m_hInstance,
+								NULL );
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::SetExLvStyle(DWORD exlvstyle)
+{
+	this->m_dwExLvStyle = exlvstyle;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+LPLVITEM CWListView::GetItem(int index)
+{
+	LVITEM *lvi;
+	lvi = new LVITEM;
+
+	lvi->mask = LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH | LVCF_FMT | LVIF_PARAM;
+	lvi->iItem = index;
+	lvi->iSubItem = 0;
+
+	ListView_GetItem(m_hWnd, lvi);
+	return lvi;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::AddColumn(char title[], int width, int index)
+{
+	LV_COLUMN lvc;
+
+	lvc.mask = LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH | LVCF_FMT;
+	lvc.fmt = LVCFMT_LEFT ;
+	lvc.cchTextMax = 300;
+	lvc.cx = width;
+	lvc.pszText = title;
+	lvc.iSubItem = index;
+
+	ListView_InsertColumn(m_hWnd, index, &lvc);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::RemoveColumn(int index)
+{
+	ListView_DeleteColumn(m_hWnd, index);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::ClearColumns()
+{
+	int result = 1;
+
+	while (result)
+	{
+		result = ListView_DeleteColumn(m_hWnd, 0);
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::AddItem(char text[], int index, int image, LPARAM data)
+{
+	LV_ITEM lvi;
+
+	lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE | LVIF_PARAM;
+	lvi.state = 0;
+	lvi.stateMask = -1;
+	lvi.iItem = index;
+	lvi.iSubItem = 0;
+	lvi.pszText = text;
+	lvi.iImage = image;
+	lvi.lParam = data;
+
+	ListView_InsertItem( m_hWnd, &lvi );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::AddSubitem(char text[], int index, int subindex, LPARAM data)
+{
+	ListView_SetItemText(m_hWnd, index, subindex, text);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::RemoveItem(int index)
+{
+	ListView_DeleteItem(m_hWnd, index);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+void CWListView::ClearItems()
+{
+	ListView_DeleteAllItems(m_hWnd);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+char* CWListView::GetItemText(int index)
+{
+	char* text;
+	text = new char[255];
+	ListView_GetItemText( m_hWnd, index, 0, text, 255 );
+	return text;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+char* CWListView::GetSubItemText(int index, int subindex)
+{
+	char* text;
+	text = new char[255];
+	ListView_GetItemText( m_hWnd, index, subindex, text, 255 );
+	return text;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+LPARAM CWListView::GetItemData(int index)
+{
+	LPARAM p = NULL;
+	LVITEM *lvi;
+	lvi = new LVITEM;
+
+	lvi->mask = LVIF_PARAM;
+	lvi->iItem = index;
+	lvi->iSubItem = 0;
+//	lvi->lParam = p;
+
+	ListView_GetItem(m_hWnd, lvi);
+	return lvi->lParam;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+int CWListView::GetSelectedItemIndex()
+{
+	return ListView_GetSelectionMark(m_hWnd);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+HIMAGELIST CWListView::SetNormalImageList(HIMAGELIST himl)
+{
+	return ListView_SetImageList(m_hWnd, himl, LVSIL_NORMAL);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// Purpose : 
+/// Input   : 
+/// Output  : 
+////////////////////////////////////////////////////////////////////////////////
+HIMAGELIST CWListView::SetSmallImageList(HIMAGELIST himl)
+{
+	return ListView_SetImageList(m_hWnd, himl, LVSIL_SMALL);
+}

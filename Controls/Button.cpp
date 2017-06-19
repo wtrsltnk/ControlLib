@@ -1,0 +1,20 @@
+// Button.cpp: implementation of the CButton class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CWButton::CWButton()
+{
+	this->m_dwStyle			= WS_CHILD | WS_VISIBLE | BS_NOTIFY | BS_PUSHBUTTON;
+	this->m_strClassName	= "BUTTON";
+	this->m_strTitle		= "Button";
+}
+
+CWButton::~CWButton()
+{
+}

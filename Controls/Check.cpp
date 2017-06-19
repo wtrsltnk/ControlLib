@@ -1,0 +1,20 @@
+// Check.cpp: implementation of the CCheck class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CWCheck::CWCheck()
+{
+	this->m_dwStyle			= WS_CHILD | WS_VISIBLE | BS_NOTIFY | BS_AUTOCHECKBOX;
+	this->m_strClassName	= "BUTTON";
+	this->m_strTitle		= "Checkbox";
+}
+
+CWCheck::~CWCheck()
+{
+}
