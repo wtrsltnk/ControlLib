@@ -147,7 +147,7 @@ public:
 	CWMDIChild();
 	virtual ~CWMDIChild();
 	
-	LRESULT Create(HWND hClient, LPTSTR strWindowClass);
+    LRESULT Create(HWND hClient, LPCTSTR strWindowClass);
 	void Activate();
 
 };

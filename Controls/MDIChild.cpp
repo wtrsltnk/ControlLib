@@ -94,7 +94,7 @@ CWMDIChild::~CWMDIChild()
 // Input   : 
 // OUtput  : 
 //////////////////////////////////////////////////////////////////////
-LRESULT CWMDIChild::Create(HWND hClient, LPTSTR strWindowClass)
+LRESULT CWMDIChild::Create(HWND hClient, LPCTSTR strWindowClass)
 {
 	this->m_hClient = hClient;
 
