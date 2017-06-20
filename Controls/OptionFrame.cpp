@@ -12,7 +12,7 @@ CWOptionFrame::CWOptionFrame()
 {
 	this->m_dwStyle			= WS_CHILD | WS_VISIBLE | BS_NOTIFY | BS_GROUPBOX;
 	this->m_strClassName	= "BUTTON";
-	this->m_strTitle		= "Titel";
+    strcpy(this->m_strTitle, "Titel");
 	this->m_nNumOptions		= 0;
 }
 

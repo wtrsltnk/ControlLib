@@ -191,7 +191,7 @@ void CWToolBox::Initialize(int height, int id, DWORD resource)
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-void CWToolBox::SetTitle(char* title)
+void CWToolBox::SetTitle(const char* title)
 {
 	CWControl::SetTitle(title);
 }

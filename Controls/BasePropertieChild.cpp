@@ -135,9 +135,8 @@ HWND CWBasePropertieChild::GetItem(int id)
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-void CWBasePropertieChild::SetTitle(LPTSTR strTitle)
+void CWBasePropertieChild::SetTitle(const char* strTitle)
 {
-	this->m_strTitle = strTitle;
 	this->m_Button.SetTitle(strTitle);
 }
 

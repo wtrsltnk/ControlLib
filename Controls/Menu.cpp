@@ -37,7 +37,7 @@ CWMenu::CWMenu()
 	strcpy(this->m_strName, "Menu");
 }
 
-CWMenu::CWMenu(char* name)
+CWMenu::CWMenu(const char* name)
 {
 	this->m_hMenu = CreateMenu();
 
@@ -68,7 +68,7 @@ HMENU CWMenu::Handle()
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-void CWMenu::AddItem(char* item, UINT id)
+void CWMenu::AddItem(const char* item, UINT id)
 {
 	AppendMenu(this->m_hMenu, MF_STRING, id, item);
 }
@@ -98,7 +98,7 @@ void CWMenu::AddSeperator()
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-void CWMenu::InsertItem(char* item, UINT id, int pos)
+void CWMenu::InsertItem(const char* item, UINT id, int pos)
 {
 	InsertMenu(this->m_hMenu, pos, MF_STRING | MF_BYPOSITION, id, item);
 }

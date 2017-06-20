@@ -13,7 +13,7 @@ CWDialog::CWDialog()
 	this->m_hInstance			 = NULL;
 	this->m_hParent				 = NULL;
 	this->m_hDlg				 = NULL;
-	this->m_dwResourceDlg		 = NULL;
+    this->m_dwResourceDlg		 = 0;
 }
 
 CWDialog::~CWDialog()

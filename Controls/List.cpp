@@ -12,7 +12,7 @@ CWList::CWList()
 {
 	this->m_dwStyle			= WS_CHILD | WS_VISIBLE | LBS_NOTIFY;
 	this->m_strClassName	= "LISTBOX";
-	this->m_strTitle		= "Titel";
+    strcpy(this->m_strTitle, "Titel");
 }
 
 CWList::~CWList()

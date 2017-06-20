@@ -22,7 +22,7 @@ CWControl::CWControl()
 	this->m_dwStyle			= WS_CHILD | WS_VISIBLE;
 	this->m_dwExStyle		= WS_EX_WINDOWEDGE;
 	this->m_strClassName	= "";
-	this->m_strTitle		= "CustomControl";
+    strcpy(this->m_strTitle, "CustomControl");
 	this->m_lpTag			= NULL;
 }
 
@@ -207,9 +207,9 @@ void CWControl::SetFont(HFONT font)
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-char* CWControl::GetTitle()
+const char* CWControl::GetTitle()
 {
-	return (LPTSTR)this->m_strTitle;
+    return (const char*)this->m_strTitle;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -217,13 +217,13 @@ char* CWControl::GetTitle()
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-void CWControl::SetTitle(char* title)
+void CWControl::SetTitle(const char* title)
 {
-	this->m_strTitle = title;
+    strcpy(this->m_strTitle, title);
 
 	if (this->m_hWnd)
 	{
-		::SendMessage(this->m_hWnd, WM_SETTEXT, 0, (LPARAM)title);
+        ::SendMessage(this->m_hWnd, WM_SETTEXT, 0, (LPARAM)this->m_strTitle);
 	}
 
 }

@@ -78,9 +78,9 @@ protected:
 	DWORD m_dwExWindowStyle;
 	DWORD m_dwCreationHeight;
 	DWORD m_dwCreationWidth;
- 	DWORD m_dwCreationFlags;
-	LPTSTR m_strWindowTitle;
-	LPTSTR m_strWindowClass;
+	DWORD m_dwCreationFlags;
+	LPCTSTR m_strWindowTitle;
+	LPCTSTR m_strWindowClass;
 	HBRUSH m_hbrWindowColor;
 	HICON  m_hIcon;
 	HCURSOR m_hCursor;
@@ -129,7 +129,7 @@ protected:
 	HWND m_hClient;
 	HWND m_hWnd;
 
-	LPTSTR m_strTitle;
+	LPCTSTR m_strTitle;
 	DWORD m_dwStyle;
 	DWORD m_PosX;
 	DWORD m_PosY;
@@ -140,9 +140,9 @@ protected:
 	void SetHandle(HWND hWnd);
 	virtual void ViewProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	virtual LRESULT OnClose(WPARAM wParam, LPARAM lParam){ return 0; };
-	virtual LRESULT OnActivate(WPARAM wParam, LPARAM lParam){ return 0; };
-	virtual LRESULT OnSize(WPARAM wParam, LPARAM lParam){ return 0; };
+	virtual LRESULT OnClose(WPARAM wParam, LPARAM lParam){ return 0; }
+	virtual LRESULT OnActivate(WPARAM wParam, LPARAM lParam){ return 0; }
+	virtual LRESULT OnSize(WPARAM wParam, LPARAM lParam){ return 0; }
 public:
 	CWMDIChild();
 	virtual ~CWMDIChild();
@@ -172,37 +172,37 @@ protected:
 protected:
 	CWBaseMDIApp* m_pPrevInstance;
 	HINSTANCE m_hInstance;
-	HWND m_hWnd;
-	HWND m_hClient;
+	HWND    m_hWnd;
+	HWND    m_hClient;
 	
-	DWORD m_dwWindowStyle;
-	DWORD m_dwExWindowStyle;
-	DWORD m_PosX;
-	DWORD m_PosY;
-	DWORD m_dwCreationHeight;
-	DWORD m_dwCreationWidth;
- 	DWORD m_dwCreationFlags;
-	LPTSTR m_strWindowTitle;
-	HACCEL m_hAccelTable;
+	DWORD   m_dwWindowStyle;
+	DWORD   m_dwExWindowStyle;
+	DWORD   m_PosX;
+	DWORD   m_PosY;
+	DWORD   m_dwCreationHeight;
+	DWORD   m_dwCreationWidth;
+	DWORD   m_dwCreationFlags;
+	LPCTSTR m_strWindowTitle;
+	HACCEL  m_hAccelTable;
 	
-	DWORD m_dwClientWindowStyle;
-	DWORD m_dwClientExWindowStyle;
-	DWORD m_ClientPosX;
-	DWORD m_ClientPosY;
-	DWORD m_dwClientCreationHeight;
-	DWORD m_dwClientCreationWidth;
+	DWORD   m_dwClientWindowStyle;
+	DWORD   m_dwClientExWindowStyle;
+	DWORD   m_ClientPosX;
+	DWORD   m_ClientPosY;
+	DWORD   m_dwClientCreationHeight;
+	DWORD   m_dwClientCreationWidth;
 
-	HICON  m_hIcon;
-	HICON  m_hSmallIcon;
-	HICON  m_hCursor;
-	HBRUSH m_hbrWindowColor;
-	LPTSTR m_strWindowClass;
+	HICON   m_hIcon;
+	HICON   m_hSmallIcon;
+	HICON   m_hCursor;
+	HBRUSH  m_hbrWindowColor;
+	LPCTSTR m_strWindowClass;
 
-	HICON  m_hChildIcon;
-	HICON  m_hChildSmallIcon;
-	HICON  m_hChildCursor;
-	HBRUSH m_hbrChildWindowColor;
-	LPTSTR m_strChildWindowClass;
+	HICON   m_hChildIcon;
+	HICON   m_hChildSmallIcon;
+	HICON   m_hChildCursor;
+	HBRUSH  m_hbrChildWindowColor;
+	LPCTSTR m_strChildWindowClass;
 
 	CWMenu* m_pMenu;
 	CWMenu* m_pSysMenu;
@@ -250,13 +250,13 @@ protected:
 
 	DWORD		m_dwStyle, m_dwExStyle;
 	LPCTSTR		m_strClassName;
-	LPCTSTR		m_strTitle;
+	char		m_strTitle[256];
 	HFONT		m_hFont;
 	LPVOID		m_lpTag;
 
-	void		SetHWND(HWND hWnd) { m_hWnd = hWnd; };
+	void		SetHWND(HWND hWnd) { m_hWnd = hWnd; }
 	void		SetParent(HWND hWnd);
-	virtual LRESULT InitWindowClass() { return FALSE; };
+	virtual LRESULT InitWindowClass() { return FALSE; }
 public:
 	virtual void Create(HWND hWnd);
 	virtual void Create(HWND parent, int id);
@@ -272,8 +272,8 @@ public:
 	HFONT GetFont();
 	void SetFont(HFONT font);
 
-	char* GetTitle();
-	void SetTitle(char* title);
+	const char* GetTitle();
+	void SetTitle(const char* title);
 
 	DWORD GetStyle();
 	void SetStyle(DWORD style);
@@ -651,8 +651,8 @@ public:
 	void RemoveColumn(int index);
 	void ClearColumns();
 
-	void AddItem(char text[], int index, int image = 0, LPARAM data = NULL);
-	void AddSubitem(char text[], int index, int subindex, LPARAM data = NULL);
+	void AddItem(char text[], int index, int image = 0, LPARAM data = 0);
+	void AddSubitem(char text[], int index, int subindex, LPARAM data = 0);
 	void RemoveItem(int index);
 	void ClearItems();
 
@@ -761,7 +761,6 @@ protected:
 	int m_nHeight;
 	int m_nOriginalHeight;
 	DWORD m_dwResource;
-	LPTSTR m_strTitle;
 
 	CWPropertieDialog m_Dialog;
 	CWButton m_Button;
@@ -773,8 +772,8 @@ protected:
 	int GetHeight();
 	
 	LRESULT ViewProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
-	virtual LRESULT OnInitDialog(WPARAM wParam, LPARAM lParam) { return FALSE; };
-	virtual LRESULT OnItemChanged(WPARAM wParam, LPARAM lParam) { return FALSE; };
+	virtual LRESULT OnInitDialog(WPARAM wParam, LPARAM lParam) { return FALSE; }
+	virtual LRESULT OnItemChanged(WPARAM wParam, LPARAM lParam) { return FALSE; }
 public:
 	CWBasePropertieChild();
 	virtual ~CWBasePropertieChild();
@@ -782,7 +781,7 @@ public:
 	void Init(int width, int height, DWORD resource, int id);
 
 	HWND GetItem(int id);
-	void SetTitle(LPTSTR strTitle);
+	void SetTitle(const char* strTitle);
 };
 
 
@@ -876,7 +875,7 @@ public:
 
 	void Initialize(int height, int id, DWORD resource = 0);
 	
-	void SetTitle(char* title);
+	void SetTitle(const char* title);
 	void SetButtonStyle(DWORD style);
 	int GetID();
 
@@ -973,13 +972,13 @@ public:
 	CWTreeView();
 	virtual ~CWTreeView();
 
-	HTREEITEM AddItem(char text[], HTREEITEM parent, int image = 0, int selimage = 1, DWORD data = NULL);
+    HTREEITEM AddItem(char* text, HTREEITEM parent, int image = 0, int selimage = 1, DWORD data = 0);
 	void RemoveItem(HTREEITEM item);
 	void ClearItems();
 	void ClearChilds(HTREEITEM item);
 	bool HasChilds(HTREEITEM item);
 
-	char* GetItemText(HTREEITEM item);
+	const char* GetItemText(HTREEITEM item);
 	DWORD GetItemData(HTREEITEM item);
 	HTREEITEM GetSelectedItem();
 	HTREEITEM GetParentItem(HTREEITEM item);
@@ -1147,14 +1146,14 @@ protected:
 	char m_strName[64];
 public:
 	CWMenu();
-	CWMenu(char* name);
+	CWMenu(const char* name);
 	virtual ~CWMenu();
 
-	void AddItem(char* item, UINT id);
+	void AddItem(const char* item, UINT id);
 	void AddSubMenu(CWMenu* submenu);
 	void AddSeperator();
 
-	void InsertItem(char* item, UINT id, int pos);
+	void InsertItem(const char* item, UINT id, int pos);
 	void InsertSubMenu(CWMenu* submenu, int pos);
 	void InsertSeperator(int pos);
 
@@ -1221,7 +1220,7 @@ public:
 	static void FreeSystemImageList();
 
 	static int GetFolderIconIndex();
-	static int GetIconIndex(char* type);
+	static int GetIconIndex(const char* type);
 };
 
 
@@ -1243,7 +1242,7 @@ protected:
 	HWND m_hWnd;
 	HICON m_hIcon;
 	NOTIFYICONDATA m_NotifyData;
-	LPTSTR m_strTitle;
+	LPCTSTR m_strTitle;
 	int m_iID;
 public:
 	CWSystrayIcon();

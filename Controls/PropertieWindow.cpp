@@ -20,7 +20,7 @@ CWPropertieWindow::CWPropertieWindow()
 	this->m_nScrollAmount	 = 0;
 	this->m_nTotalHeight	 = 0;
 	this->m_bDrag			 = false;
-	this->m_hHand			 = ::LoadCursor(GetModuleHandle("controls.dll"), MAKEINTRESOURCE(IDC_HAND));
+    this->m_hHand			 = ::LoadCursor(GetModuleHandle("controls.dll"), MAKEINTRESOURCE(IDC_HANDICON));
 }
 
 CWPropertieWindow::~CWPropertieWindow()

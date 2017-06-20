@@ -22,7 +22,7 @@ CWTreeView::~CWTreeView()
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-HTREEITEM CWTreeView::AddItem(char text[], HTREEITEM parent, int image, int selimage, DWORD data)
+HTREEITEM CWTreeView::AddItem(char* text, HTREEITEM parent, int image, int selimage, DWORD data)
 {
 	TV_INSERTSTRUCT tvins;
 	TV_ITEM tvi;
@@ -93,10 +93,10 @@ bool CWTreeView::HasChilds(HTREEITEM item)
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-char* CWTreeView::GetItemText(HTREEITEM item)
+const char* CWTreeView::GetItemText(HTREEITEM item)
 {
 	TVITEM tvi;
-	char* text = new char[255];
+    static char* text = new char[255];
 	tvi.hItem		=	item;
 	tvi.cchTextMax	=	255;
 	tvi.pszText		=	text;

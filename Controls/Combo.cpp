@@ -12,7 +12,7 @@ CWCombo::CWCombo()
 {
 	this->m_dwStyle			= WS_CHILD | WS_VISIBLE | CBS_DROPDOWN;
 	this->m_strClassName	= "COMBOBOX";
-	this->m_strTitle		= "Combobox";
+    strcpy(this->m_strTitle, "Combobox");
 }
 
 CWCombo::~CWCombo()

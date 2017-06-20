@@ -5,6 +5,7 @@ project(ControlLib)
 find_package(OpenGL REQUIRED)
 
 set(SRC_APP
+    ../package/include/controls.h
     3DEngine.cpp
     BaseApp.cpp
     BaseMDIApp.cpp
@@ -46,7 +47,7 @@ set(SRC_APP
     )
 
 add_library(Controls SHARED
-    ${SRC_APP}
+	${SRC_APP}
 	)
 
 target_link_libraries(Controls

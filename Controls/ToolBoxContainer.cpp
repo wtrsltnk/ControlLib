@@ -13,7 +13,7 @@ CWToolBoxContainer::CWToolBoxContainer()
 	this->m_strClassName		 = "ToolBoxContainer";
 	this->m_dwStyle				 = WS_CHILD;
 	this->m_hbrBackground		 = (HBRUSH)COLOR_WINDOW;
-	this->m_hHand				 = ::LoadCursor(GetModuleHandle("controls.dll"), MAKEINTRESOURCE(IDC_HAND));
+    this->m_hHand				 = ::LoadCursor(GetModuleHandle("controls.dll"), MAKEINTRESOURCE(IDC_HANDICON));
 	this->m_bDrag				 = false;
 	this->m_nScrollAmount		 = 0;
 	this->m_nTotalHeight		 = 0;

@@ -124,7 +124,7 @@ int CWSysImageList::GetFolderIconIndex()
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-int CWSysImageList::GetIconIndex(char* file)
+int CWSysImageList::GetIconIndex(const char* file)
 {
 	int res = 0;
 

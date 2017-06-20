@@ -2,7 +2,7 @@
 // Microsoft Developer Studio generated include file.
 // Used by resource.rc
 //
-#define IDC_HAND                        101
+#define IDC_HANDICON                        101
 
 // Next default values for new objects
 // 

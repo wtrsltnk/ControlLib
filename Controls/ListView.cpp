@@ -27,7 +27,7 @@ void CWListView::Create(HWND parent, int id, DWORD exlvstyle)
 {
 	this->m_hParent			= parent;
 	this->m_nID				= id;
-	if (exlvstyle != NULL)
+    if (exlvstyle != 0)
 		this->m_dwExLvStyle = exlvstyle;
 	
 	m_hWnd = ::CreateWindowEx(	this->m_dwExStyle,
@@ -218,7 +218,7 @@ char* CWListView::GetSubItemText(int index, int subindex)
 ////////////////////////////////////////////////////////////////////////////////
 LPARAM CWListView::GetItemData(int index)
 {
-	LPARAM p = NULL;
+    LPARAM p = 0;
 	LVITEM *lvi;
 	lvi = new LVITEM;
 

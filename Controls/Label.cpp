@@ -11,7 +11,7 @@
 CWLabel::CWLabel()
 {
 	this->m_strClassName	= "STATIC";
-	this->m_strTitle		= "Label";
+    strcpy(this->m_strTitle, "Label");
 }
 
 CWLabel::~CWLabel()
