@@ -4,6 +4,8 @@
 
 #include "stdafx.h"
 
+#include <string.h>
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -12,7 +14,7 @@ CWSlider::CWSlider()
 {
 	this->m_dwStyle			= WS_CHILD | WS_VISIBLE;
 	this->m_strClassName	= "msctls_trackbar32";
-	this->m_strTitle		= "Titel";
+    strcpy_s(this->m_strTitle, MAX_PATH, "Titel");
 }
 
 CWSlider::~CWSlider()

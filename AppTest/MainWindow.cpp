@@ -13,9 +13,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      LPSTR     lpCmdLine,
                      int       nCmdShow)
 {
-	CMainWindow app;
+    CMainWindow app(hInstance);
 
-	if (!app.Init(hInstance))
+    if (!app.Init())
 	{
 		::MessageBox(NULL, "Unable to create Form", "ERROR :", MB_OK | MB_ICONEXCLAMATION);
 		return 0;
@@ -28,7 +28,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CMainWindow::CMainWindow()
+CMainWindow::CMainWindow(
+    HINSTANCE hInstance)
+    : CWBaseApp(hInstance)
 {
 	this->m_strWindowClass = "MainWindow";
 	this->m_pMenu = new CWMenu();

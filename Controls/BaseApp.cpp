@@ -123,11 +123,14 @@ SIZE* CWBaseApp::GetScreensize()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CWBaseApp::CWBaseApp()
+CWBaseApp::CWBaseApp(
+    HINSTANCE hInstance)
 {
+    this->m_hInstance = hInstance;
+
 	this->m_pPrevInstance	 = CWBaseApp::m_pInstance;
-	CWBaseApp::m_pInstance	 = this;
-	
+    CWBaseApp::m_pInstance	 = this;
+
 	char path[MAX_PATH];
 	GetModuleFileName (0, path, 256);
 	char *ptr = strrchr (path, '\\');
@@ -148,7 +151,7 @@ CWBaseApp::CWBaseApp()
 	this->m_dwCreationHeight = CW_USEDEFAULT;
 	this->m_dwCreationFlags	 = SW_SHOW;
 	this->m_hbrWindowColor	 = (HBRUSH)(COLOR_WINDOW+1);
-	this->m_hIcon			 = LoadIcon(m_hInstance, (LPCTSTR)IDI_APPLICATION);
+    this->m_hIcon			 = LoadIcon(m_hInstance, (LPCTSTR)IDI_APPLICATION);
 	this->m_hCursor			 = LoadCursor(NULL, IDC_ARROW);
 	this->m_strWindowTitle	 = "BaseApplication";
 	this->m_strWindowClass	 = 0;
@@ -185,11 +188,9 @@ CWBaseApp::~CWBaseApp()
 /// Input   : 
 /// Output  : 
 ////////////////////////////////////////////////////////////////////////////////
-LRESULT CWBaseApp::Init(HINSTANCE hInstance)
+LRESULT CWBaseApp::Init()
 {
 	HMENU hMenu = NULL;
-
-	this->m_hInstance = hInstance;
 
 	if (!InitWindowClass())
 		return FALSE;

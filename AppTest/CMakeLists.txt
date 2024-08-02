@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 
 project(ControlLib)
 
-
-set(SRC_APP
+add_executable(AppTest WIN32
     MainWindow.cpp
     MainWindow.h
     Props.cpp
@@ -11,10 +10,6 @@ set(SRC_APP
     resource.rc
     TrayIcon.cpp
     TrayIcon.h
-    )
-
-add_executable(AppTest
-    ${SRC_APP}
     )
 
 target_link_libraries(AppTest

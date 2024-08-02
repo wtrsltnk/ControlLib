@@ -23,17 +23,17 @@ LRESULT CWMDIChild::StaticProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 		if (pChild)
 		{
 			pChild->SetHandle(hWnd);
-			::SetWindowLong(hWnd, GWL_USERDATA, reinterpret_cast<long>(pChild));
+            ::SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<long long>(pChild));
 		}
 	}
 	else if (uMsg == WM_DESTROY)
 	{
 		delete pChild;
-		::SetWindowLong(hWnd, GWL_USERDATA, 0);
+        ::SetWindowLongPtr(hWnd, GWLP_USERDATA, 0);
 	}
 	else
 	{
-		pChild = reinterpret_cast <CWMDIChild *> (::GetWindowLong(hWnd, GWL_USERDATA));
+        pChild = reinterpret_cast <CWMDIChild *> (::GetWindowLongPtr(hWnd, GWLP_USERDATA));
 			
 		if (pChild)
 		{

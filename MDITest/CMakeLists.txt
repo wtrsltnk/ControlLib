@@ -2,17 +2,13 @@ cmake_minimum_required(VERSION 3.1)
 
 project(ControlLib)
 
-set(SRC_APP
+add_executable(MDITest WIN32
     Document.cpp
     Document.h
     MainFrame.cpp
     MainFrame.h
     TrayIcon.cpp
     TrayIcon.h
-    )
-
-add_executable(MDITest
-    ${SRC_APP}
     )
 
 target_link_libraries(MDITest

@@ -98,10 +98,10 @@ protected:
 	virtual LRESULT ViewProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
-	CWBaseApp();
+    CWBaseApp(HINSTANCE hInstance);
 	~CWBaseApp();
 
-	LRESULT Init(HINSTANCE hInstance);
+    LRESULT Init();
 	LRESULT Run();
 };
 
@@ -240,7 +240,7 @@ class CTRLDLL_API CWControl
 {
 protected:
 	CWControl();
-	~CWControl();
+    virtual ~CWControl();
 
 	HWND		m_hWnd, m_hParent;
 	HINSTANCE	m_hInstance;

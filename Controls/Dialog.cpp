@@ -16,9 +16,7 @@ CWDialog::CWDialog()
     this->m_dwResourceDlg		 = 0;
 }
 
-CWDialog::~CWDialog()
-{
-}
+CWDialog::~CWDialog() = default;
 
 //////////////////////////////////////////////////////////////////////
 // Purpose : 
@@ -37,12 +35,12 @@ LRESULT CWDialog::StaticProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		pDlg->SetHandle(hDlg);
 
 		// Set it in the Window param
-		::SetWindowLong(hDlg, GWL_USERDATA, reinterpret_cast<long>(pDlg));
+        ::SetWindowLongPtr(hDlg, GWLP_USERDATA, reinterpret_cast<long long>(pDlg));
 	}
 	else
 	{
 		// Get the object from the window param
-		pDlg = reinterpret_cast<CWDialog *>(::GetWindowLong(hDlg, GWL_USERDATA)); 
+        pDlg = reinterpret_cast<CWDialog *>(::GetWindowLongPtr(hDlg, GWLP_USERDATA));
 	}
 
 	if (pDlg)

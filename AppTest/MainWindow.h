@@ -16,7 +16,7 @@ private:
 	CWBasePropertieChild* m_pPropDialog2;
 	CWBasePropertieChild* m_pPropDialog3;
 public:
-	CMainWindow();
+    CMainWindow(HINSTANCE hInstance);
 	virtual ~CMainWindow();
 
 	LRESULT ViewProc(UINT uMsg, WPARAM wParam, LPARAM lParam);

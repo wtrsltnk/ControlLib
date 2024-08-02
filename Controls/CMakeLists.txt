@@ -33,6 +33,7 @@ set(SRC_APP
     PropertieWindow.cpp
     resource.h
     resource.rc
+    Slider.cpp
     Splitter.cpp
     StdAfx.cpp
     StdAfx.h

@@ -18,11 +18,11 @@ LRESULT CWCustomControl::StaticProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 		if (pView)
 			pView->SetHWND(hWnd);
 		
-		::SetWindowLong(hWnd, GWL_USERDATA, reinterpret_cast<long>( pView ));
+        ::SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<long long>( pView ));
 	} 
 	else
 	{
-		pView = reinterpret_cast<CWCustomControl *>( ::GetWindowLong(hWnd, GWL_USERDATA) );
+        pView = reinterpret_cast<CWCustomControl *>( ::GetWindowLongPtr(hWnd, GWLP_USERDATA) );
 		
 		if (pView)
 		{
